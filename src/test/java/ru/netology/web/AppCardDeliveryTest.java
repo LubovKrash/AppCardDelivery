@@ -24,7 +24,7 @@ public class AppCardDeliveryTest {
         Selenide.open("http://localhost:9999");
         $("[data-test-id='city'] input").setValue("Иваново");
         String enteredDate = generateDate(3, "dd.MM.yyyy");
-        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME, Keys.DELETE), Keys.DELETE);
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id='date'] input").setValue(enteredDate);
         $("[data-test-id='name'] input").setValue("Тяпкин Михаил Иванович");
         $("[data-test-id='phone'] input").setValue("+79354780125");
