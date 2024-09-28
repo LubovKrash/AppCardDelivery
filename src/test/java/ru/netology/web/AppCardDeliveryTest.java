@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.getSelectedText;
 
 public class AppCardDeliveryTest {
 
@@ -22,8 +23,15 @@ public class AppCardDeliveryTest {
     public void letMeTest() {
         Selenide.open("http://localhost:9999");
         $("[data-test-id='city'] input").setValue("Иваново");
-        String enteredDate = generateDate(1, "dd.MM.yyyy");
+        String enteredDate = generateDate(3, "dd.MM.yyyy");
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id='date'] input").setValue(enteredDate);
+        $("[data-test-id='name'] input").setValue("Тяпкин Михаил Иванович");
+        $("[data-test-id='phone'] input").setValue("+79354780125");
+        $("[data-test-id='agreement']").click();
+        $("button.button").click();
+        $(".notification__content")
+                .shouldBe(Condition.visible, Duration.ofSeconds(15))
+                .shouldHave(Condition.text("Встреча успешно забронирована на " + enteredDate));
           }
 }
